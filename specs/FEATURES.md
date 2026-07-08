@@ -55,7 +55,7 @@ Base URL: `import.meta.env.VITE_API_BASE_URL` (default `http://localhost:8787`).
 - User messages are appended to the active thread
 - Each send calls `sendChatMessage(message, history)` → `POST /chat` with body `{ "message": "...", "history": [...] }`
 - Prior user/assistant turns are included so follow-up messages stay in context
-- Assistant reply is rendered from `data.reply`
+- Assistant reply is rendered from `data.reply` via `ChatMarkdown` (`react-markdown` + `remark-gfm`) — headings, lists, links, fenced code, and tables; user messages stay plain text
 - Enter sends; Shift+Enter inserts a newline
 
 ### Header navigation
@@ -81,6 +81,7 @@ App
 |------|------|
 | `src/pages/HomePage.tsx` | Authenticated home + `/me` debug |
 | `src/pages/ChatPage.tsx` | Chat UI, thread state, message flow |
+| `src/components/chat-markdown.tsx` | GFM markdown renderer for assistant bubbles |
 | `src/components/chat-sidebar.tsx` | Session thread list sidebar |
 | `src/lib/chat-threads.ts` | `sessionStorage` thread persistence |
 | `src/api/me.ts` | `GET /me` client |

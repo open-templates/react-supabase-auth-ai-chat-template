@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Session handling** — `AuthContext`, `localStorage['x-auth-token']`, automatic token refresh on `401` via `apiFetch`.
 - **Home (`/`)** — post-login landing with Supabase session display and `GET /me` JWT verification (debug/security check).
 - **AI chat (`/chat`)** — authenticated chat UI calling `POST /chat` with Bearer JWT.
+- **Markdown replies** — assistant messages render via `react-markdown` + `remark-gfm` (headings, lists, links, code blocks, tables) for readable model output.
 - **Multi-turn conversations** — each send includes prior thread messages in `history` for follow-up context.
 - **Chat sidebar** — `sessionStorage` thread list (new chat, switch, delete) for the current browser session.
 - **Header** — API health poll (`GET /health` every 30s), Home/Chat nav, theme toggle, sign out.
