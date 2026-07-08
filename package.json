@@ -45,7 +45,7 @@
   },
   "packageManager": "bun@1.2.15",
   "dependencies": {
-    "@hookform/resolvers": "^5.2.2",
+    "@hookform/resolvers": "^5.4.0",
     "@iconify/react": "^6.0.2",
     "@radix-ui/react-accordion": "^1.2.12",
     "@radix-ui/react-alert-dialog": "^1.1.15",
