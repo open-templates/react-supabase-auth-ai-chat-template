@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Loader2Icon, SendIcon } from "lucide-react";
 import { sendChatMessage } from "@/api/chat";
 import { ChatSidebar } from "@/components/chat-sidebar";
+import { ChatMarkdown } from "@/components/chat-markdown";
 import { Button } from "@/components/ui/button";
 import {
   createThread,
@@ -174,13 +175,17 @@ export default function ChatPage() {
               >
                 <div
                   className={cn(
-                    "max-w-[85%] whitespace-pre-wrap rounded-lg px-4 py-2 text-sm",
+                    "max-w-[85%] rounded-lg px-4 py-2 text-sm",
                     msg.role === "user"
-                      ? "bg-primary text-primary-foreground"
+                      ? "whitespace-pre-wrap bg-primary text-primary-foreground"
                       : "bg-muted text-foreground"
                   )}
                 >
-                  {msg.content}
+                  {msg.role === "assistant" ? (
+                    <ChatMarkdown content={msg.content} />
+                  ) : (
+                    msg.content
+                  )}
                 </div>
               </div>
             ))}
