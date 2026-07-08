@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState, useMemo, useCallback } from 'react'
 import { User, Session } from '@supabase/supabase-js'
 import { supabase } from '@/lib/supabase'
+import { clearAllChatState } from '@/lib/chat-threads'
 import { useNavigate } from 'react-router'
 
 interface AuthContextType {
@@ -107,6 +108,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }, [])
 
     const signOut = useCallback(async () => {
+        clearAllChatState()
         await supabase.auth.signOut()
         navigate('/login')
     }, [navigate])

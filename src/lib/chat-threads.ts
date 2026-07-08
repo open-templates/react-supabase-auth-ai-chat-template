@@ -90,6 +90,12 @@ export function deleteThread(threadId: string) {
   }
 }
 
+/** Remove all chat threads from sessionStorage (e.g. on sign out). */
+export function clearAllChatState() {
+  sessionStorage.removeItem(THREADS_KEY);
+  sessionStorage.removeItem(ACTIVE_THREAD_KEY);
+}
+
 export function titleFromMessage(text: string): string {
   const trimmed = text.trim().replace(/\s+/g, " ");
   if (!trimmed) return "New chat";
