@@ -1,4 +1,10 @@
 import { API_BASE_URL, apiFetch } from "@/api/api";
+import type { ChatRole } from "@/lib/chat-threads";
+
+export type ChatHistoryItem = {
+  role: ChatRole;
+  content: string;
+};
 
 export interface ChatCompletionResponse {
   message: string;
@@ -6,7 +12,10 @@ export interface ChatCompletionResponse {
   model: string;
 }
 
-export async function sendChatMessage(message: string): Promise<{
+export async function sendChatMessage(
+  message: string,
+  history: ChatHistoryItem[] = []
+): Promise<{
   data?: ChatCompletionResponse;
   error?: string;
 }> {
@@ -14,6 +23,6 @@ export async function sendChatMessage(message: string): Promise<{
   return apiFetch(url, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ message }),
+    body: JSON.stringify({ message, history }),
   });
 }

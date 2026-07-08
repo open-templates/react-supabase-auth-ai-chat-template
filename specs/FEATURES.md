@@ -51,15 +51,17 @@ Base URL: `import.meta.env.VITE_API_BASE_URL` (default `http://localhost:8787`).
 ### AI chat (`ChatPage`)
 
 - Available at `/chat`
-- User messages are appended to local chat state
-- Each send calls `sendChatMessage()` → `POST /chat` with body `{ "message": "..." }`
+- **Sidebar** — vertical thread list in `sessionStorage` (new chat, switch thread, delete); cleared when the browser session ends
+- User messages are appended to the active thread
+- Each send calls `sendChatMessage(message, history)` → `POST /chat` with body `{ "message": "...", "history": [...] }`
+- Prior user/assistant turns are included so follow-up messages stay in context
 - Assistant reply is rendered from `data.reply`
 - Enter sends; Shift+Enter inserts a newline
 
-### Health indicator (`AppHeader`)
+### Header navigation
 
-- Polls every **30 seconds**
-- Visible on all pages including login
+- **Home** and **Chat** links when authenticated
+- API health poll (`GET /health` every **30 seconds**) on all pages including login
 
 ## Layout
 
@@ -78,7 +80,9 @@ App
 | Path | Role |
 |------|------|
 | `src/pages/HomePage.tsx` | Authenticated home + `/me` debug |
-| `src/pages/ChatPage.tsx` | Chat UI and message flow |
+| `src/pages/ChatPage.tsx` | Chat UI, thread state, message flow |
+| `src/components/chat-sidebar.tsx` | Session thread list sidebar |
+| `src/lib/chat-threads.ts` | `sessionStorage` thread persistence |
 | `src/api/me.ts` | `GET /me` client |
 | `src/api/chat.ts` | `POST /chat` client |
 | `src/api/api.ts` | `apiFetch` with JWT + refresh |
