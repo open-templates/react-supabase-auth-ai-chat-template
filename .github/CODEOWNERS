@@ -1,0 +1,3 @@
+# Default owner for the hosted template — adopters get @owner-username via init
+* @open-templates
+.github/workflows/* @open-templates
