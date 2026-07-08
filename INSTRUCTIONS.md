@@ -1,6 +1,6 @@
-# Agent & developer instructions — react-supabase-auth-template
+# Agent & developer instructions — react-supabase-auth-ai-chat-template
 
-Use this file when turning this template into a **production SPA** with Supabase Auth and a Cloudflare Worker backend. This repository is **self-contained** for the UI and client-side auth; API calls require a separate worker (this template pairs with [cf-hono-supabase-api-template](https://github.com/open-templates/cf-hono-supabase-api-template) as the demo backend).
+Use this file when turning this template into a **production SPA** with Supabase Auth and a Cloudflare Worker backend. This repository is **self-contained** for the UI and client-side auth; API calls require a separate worker (this template pairs with [cf-hono-supabase-gemini-api-template](https://github.com/open-templates/cf-hono-supabase-gemini-api-template) as the demo backend).
 
 ## What ships out of the box
 
@@ -9,7 +9,8 @@ Use this file when turning this template into a **production SPA** with Supabase
 | Google OAuth | Sign in / sign up via Supabase |
 | Email auth | Login, signup, password recovery & reset |
 | API health indicator | Header polls `GET /health` |
-| Protected home | Calls `GET /me` with JWT |
+| **Home (`/`)** | `GET /me` JWT verification and session debug |
+| **AI chat (`/chat`)** | Chat UI → `POST /chat` with Bearer JWT |
 
 Details: [`specs/FEATURES.md`](specs/FEATURES.md)
 
@@ -88,7 +89,7 @@ Test:
 
 This frontend does **not** include the API worker. For `/health` and `/me`:
 
-1. Clone or fork **[cf-hono-supabase-api-template](https://github.com/open-templates/cf-hono-supabase-api-template)**.
+1. Clone or fork **[cf-hono-supabase-gemini-api-template](https://github.com/open-templates/cf-hono-supabase-gemini-api-template)**.
 2. Complete **its** `INSTRUCTIONS.md` (same Supabase project credentials in worker `.dev.vars`).
 3. Start worker: `npm run dev` (port `8787`).
 4. Set worker `ALLOWED_ORIGINS=http://localhost:5173` (and production URL when deployed).

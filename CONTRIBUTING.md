@@ -9,8 +9,8 @@ Participation in this project means agreeing to the rules in `CODE_OF_CONDUCT.md
 ## Local Setup
 
 ```bash
-git clone https://github.com/open-templates/react-supabase-auth-template.git
-cd react-supabase-auth-template
+git clone https://github.com/open-templates/react-supabase-auth-ai-chat-template.git
+cd react-supabase-auth-ai-chat-template
 bun install
 bun run dev
 ```

@@ -1,58 +1,65 @@
 # Frontend features specification
 
-This document describes the intentional, production-ready surface of **react-supabase-auth-template**. Use it when extending the UI or wiring new backend endpoints.
+This document describes the intentional surface of **react-supabase-auth-ai-chat-template**.
 
 ## Purpose
 
-A minimal authenticated SPA template: Supabase handles identity on the client; a Hono worker on Cloudflare validates JWTs for API calls. Users can fork and add domain features without removing the auth + API skeleton.
+A Supabase-authenticated SPA with a built-in **AI chat** UI. The browser holds the Supabase session; the Cloudflare Worker validates JWTs and runs chat completions server-side.
 
 ## Authentication
 
 ### Providers
 
-- **Google OAuth** — primary social login (`loginWithGoogle` in `AuthContext`)
+- **Google OAuth**
 - **Email/password** — sign up, sign in, recover password, reset password
-
-OAuth is configured entirely in the Supabase dashboard (no Google client ID in frontend env vars).
 
 ### Session storage
 
 - Supabase session via `onAuthStateChange`
-- Access token mirrored to `localStorage['x-auth-token']` for API `Authorization: Bearer` headers
-- On `401`, `apiFetch` attempts `supabase.auth.refreshSession()` and retries once
+- Access token in `localStorage['x-auth-token']` for `Authorization: Bearer` on API calls
+- On `401`, `apiFetch` refreshes the session and retries once
 
 ### Auth routes
 
 | Route | Guard | Component |
 |-------|-------|-----------|
-| `/login` | Guest only | `LogInPage` |
-| `/signup` | Guest only | `SignUpPage` |
-| `/recover-password` | Guest only | `RecoverPasswordPage` |
-| `/reset-password` | Authenticated | `ResetPasswordPage` |
+| `/login` | Guest | `LogInPage` |
+| `/signup` | Guest | `SignUpPage` |
+| `/recover-password` | Guest | `RecoverPasswordPage` |
+| `/reset-password` | Auth | `ResetPasswordPage` |
+| `/` | Auth | `HomePage` — `GET /me` JWT debug |
+| `/chat` | Auth | `ChatPage` — `POST /chat` |
 
-Guests hitting `/` are redirected to `/login`. Authenticated users hitting auth pages are redirected to `/`.
+Guests hitting `/` or `/chat` are redirected to `/login`.
 
 ## API integration
-
-Configured in `src/api/`:
 
 | Module | Endpoint | Auth | Used by |
 |--------|----------|------|---------|
 | `health.ts` | `GET /health` | No | `useApiHealth` → `AppHeader` |
 | `me.ts` | `GET /me` | Bearer JWT | `HomePage` |
+| `chat.ts` | `POST /chat` | Bearer JWT | `ChatPage` |
 
 Base URL: `import.meta.env.VITE_API_BASE_URL` (default `http://localhost:8787`).
+
+### Home (`HomePage`)
+
+- Default landing page after login (`/`)
+- Shows Supabase session (client) and `GET /me` response (server-validated JWT)
+- Link to `/chat` for AI completions
+
+### AI chat (`ChatPage`)
+
+- Available at `/chat`
+- User messages are appended to local chat state
+- Each send calls `sendChatMessage()` → `POST /chat` with body `{ "message": "..." }`
+- Assistant reply is rendered from `data.reply`
+- Enter sends; Shift+Enter inserts a newline
 
 ### Health indicator (`AppHeader`)
 
 - Polls every **30 seconds**
-- States: `checking` (yellow), `online` (green), `offline` (red)
-- Visible on **all** pages (including login) so users always see API connectivity
-
-### Home page (`/`)
-
-- Shows Supabase session email/ID (client-side)
-- Fetches and displays JSON from `GET /me` (server-validated profile)
+- Visible on all pages including login
 
 ## Layout
 
@@ -62,27 +69,29 @@ App
     └── Router
         └── AuthProvider
             └── AppLayout
-                ├── AppHeader   (health + sign out when logged in)
-                └── Outlet      (HomePage or auth pages)
+                ├── AppHeader
+                └── Outlet → HomePage (/) or ChatPage (/chat) or auth pages
 ```
 
 ## Key files
 
 | Path | Role |
 |------|------|
-| `src/auth/AuthContext.tsx` | Supabase auth state and methods |
+| `src/pages/HomePage.tsx` | Authenticated home + `/me` debug |
+| `src/pages/ChatPage.tsx` | Chat UI and message flow |
+| `src/api/me.ts` | `GET /me` client |
+| `src/api/chat.ts` | `POST /chat` client |
+| `src/api/api.ts` | `apiFetch` with JWT + refresh |
+| `src/auth/AuthContext.tsx` | Supabase auth state |
 | `src/auth/AuthGuard.tsx` | Route protection |
-| `src/api/api.ts` | Shared `apiFetch` with JWT + retry |
-| `src/layout/AppHeader.tsx` | Global header + health dot |
-| `src/pages/HomePage.tsx` | Authenticated landing page |
-
-## Extension guidelines
-
-1. Add new API modules under `src/api/` using `apiFetch`.
-2. Register routes in `src/App.tsx` inside `AppLayout` with appropriate `AuthGuard`.
-3. Keep `specs/FEATURES.md` updated when adding user-visible behavior.
-4. Do not put service role keys or secrets in `VITE_*` variables.
 
 ## Backend pairing
 
-Requires **cf-hono-supabase-api-template** (or any API that implements the same `/health` and `/me` contracts). See that repo's `specs/FEATURES.md` for response shapes.
+Pairs with **cf-hono-supabase-gemini-api-template** (or any worker implementing the same `/health` and `/chat` contracts). See that repo's `specs/FEATURES.md` for response shapes.
+
+## Extension guidelines
+
+1. Add API modules under `src/api/` using `apiFetch`.
+2. Register routes in `src/App.tsx` inside `AppLayout` with `AuthGuard`.
+3. Update this file when adding user-visible behavior.
+4. Never put provider API keys or secrets in `VITE_*` variables.

@@ -1,6 +1,6 @@
 ---
 name: page-architecture
-description: Page and layout patterns for react-supabase-auth-template. Use when adding pages, changing AppLayout or AppHeader, implementing data loading on pages, or extending the authenticated home experience.
+description: Page and layout patterns for react-supabase-auth-ai-chat-template. Use when adding pages, changing AppLayout or AppHeader, implementing ChatPage, or extending the authenticated chat experience.
 ---
 
 # Page Architecture

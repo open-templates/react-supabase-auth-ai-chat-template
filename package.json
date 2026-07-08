@@ -1,8 +1,8 @@
 {
-  "name": "react-supabase-auth-template",
+  "name": "react-supabase-auth-ai-chat-template",
   "version": "0.1.0",
   "private": true,
-  "description": "Minimal React + Supabase Auth starter with Google OAuth, health check, and /me API integration. Pairs with cf-hono-supabase-api-template.",
+  "description": "React + Supabase Auth SPA with an AI chat page. Pairs with cf-hono-supabase-gemini-api-template.",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -18,14 +18,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/open-templates/react-supabase-auth-template.git"
+    "url": "git+https://github.com/open-templates/react-supabase-auth-ai-chat-template.git"
   },
-  "homepage": "https://github.com/open-templates/react-supabase-auth-template#readme",
+  "homepage": "https://github.com/open-templates/react-supabase-auth-ai-chat-template#readme",
   "bugs": {
-    "url": "https://github.com/open-templates/react-supabase-auth-template/issues"
+    "url": "https://github.com/open-templates/react-supabase-auth-ai-chat-template/issues"
   },
   "keywords": [
-    "react-supabase-auth-template",
+    "react-supabase-auth-ai-chat-template",
     "supabase",
     "oauth",
     "google",

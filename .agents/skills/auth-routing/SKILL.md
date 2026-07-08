@@ -1,6 +1,6 @@
 ---
 name: auth-routing
-description: Supabase authentication and React Router guards in react-supabase-auth-template. Use when working on login, signup, Google OAuth, password reset, AuthContext, AuthGuard, session tokens, or protected vs guest routes.
+description: Supabase authentication and React Router guards in react-supabase-auth-ai-chat-template. Use when working on login, signup, Google OAuth, password reset, AuthContext, AuthGuard, session tokens, or protected vs guest routes.
 ---
 
 # Auth & Routing

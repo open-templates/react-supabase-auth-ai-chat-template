@@ -2,7 +2,7 @@
   "name": "repo-name",
   "version": "0.1.0",
   "private": true,
-  "description": "Minimal React + Supabase Auth starter with Google OAuth, health check, and /me API integration.",
+  "description": "React + Supabase Auth SPA with AI chat. Pairs with cf-hono-supabase-gemini-api-template.",
   "type": "module",
   "scripts": {
     "dev": "vite",

@@ -26,6 +26,6 @@ node scripts/init-from-template.mjs
 ./scripts/init-from-template.sh --no-cleanup   # keep scripts for debugging
 ```
 
-After init, the `scripts/` folder is removed. Pair with [cf-hono-supabase-api-template](https://github.com/open-templates/cf-hono-supabase-api-template) or [react-supabase-auth-template](https://github.com/open-templates/react-supabase-auth-template) using the same GitHub owner.
+After init, the `scripts/` folder is removed. Pair with [cf-hono-supabase-gemini-api-template](https://github.com/open-templates/cf-hono-supabase-gemini-api-template) or [react-supabase-auth-ai-chat-template](https://github.com/open-templates/react-supabase-auth-ai-chat-template) using the same GitHub owner.
 
 See [`templates/ABOUT_TEMPLATES.md`](../templates/ABOUT_TEMPLATES.md).

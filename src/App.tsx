@@ -14,6 +14,7 @@ import SignUpPage from "@/auth/pages/SignUpPage";
 import RecoverPasswordPage from "@/auth/pages/RecoverPasswordPage";
 import ResetPasswordPage from "@/auth/pages/ResetPasswordPage";
 import HomePage from "@/pages/HomePage";
+import ChatPage from "@/pages/ChatPage";
 
 const LoadingSpinner = () => (
   <div className="flex h-screen items-center justify-center">
@@ -35,6 +36,14 @@ const router = createBrowserRouter([
         element: (
           <AuthGuard requireAuth>
             <HomePage />
+          </AuthGuard>
+        ),
+      },
+      {
+        path: "/chat",
+        element: (
+          <AuthGuard requireAuth>
+            <ChatPage />
           </AuthGuard>
         ),
       },

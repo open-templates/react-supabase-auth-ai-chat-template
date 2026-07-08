@@ -1,6 +1,6 @@
 ---
 name: api-architecture
-description: Patterns for calling the Cloudflare Worker backend from this React app. Use when adding API modules in src/api/, wiring apiFetch, health checks, authenticated /me calls, or integrating new worker endpoints from cf-hono-supabase-api-template.
+description: Patterns for calling the Cloudflare Worker backend from this React app. Use when adding API modules in src/api/, wiring apiFetch, health checks, authenticated chat calls, or integrating new worker endpoints.
 ---
 
 # API Architecture (Frontend)
@@ -16,6 +16,7 @@ This template does **not** call Supabase Postgres directly from the browser for 
 | `src/api/api.ts` | `API_BASE_URL`, `apiFetch()` — JWT header, 401 refresh retry, toast on errors |
 | `src/api/health.ts` | `GET /health` (no auth) |
 | `src/api/me.ts` | `GET /me` (authenticated) |
+| `src/api/chat.ts` | `POST /chat` (authenticated completions) |
 
 Token source: `localStorage['x-auth-token']` (set by `AuthContext` from Supabase session).
 
@@ -24,8 +25,12 @@ Token source: `localStorage['x-auth-token']` (set by `AuthContext` from Supabase
 ```typescript
 import { API_BASE_URL, apiFetch } from "@/api/api";
 
-const url = new URL("/me", API_BASE_URL);
-const { data, error } = await apiFetch(url, { method: "GET" });
+const url = new URL("/chat", API_BASE_URL);
+const { data, error } = await apiFetch(url, {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ message: "Hello" }),
+});
 // auth defaults to true — pass false for public routes like /health
 ```
 
@@ -68,7 +73,7 @@ See `src/hooks/use-api-health.ts` and `src/layout/AppHeader.tsx`:
 
 ## Backend pairing
 
-Implement the route in **cf-hono-supabase-api-template** first. Response shape:
+Implement the route on the paired worker first. Response shape:
 
 ```json
 { "success": true, "data": { ... } }
@@ -85,4 +90,4 @@ Document both sides in each repo's `specs/FEATURES.md`.
 ## See also
 
 - [`specs/FEATURES.md`](../../specs/FEATURES.md)
-- Backend skill: `cf-hono-supabase-api-template/.agents/skills/create-api-endpoint/SKILL.md`
+- Backend skill: `cf-hono-supabase-gemini-api-template/.agents/skills/create-api-endpoint/SKILL.md`

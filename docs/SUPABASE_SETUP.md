@@ -5,7 +5,7 @@ Guide for configuring Supabase Auth with this template (email/password + Google 
 ## Prerequisites
 
 - Supabase account (free tier)
-- [cf-hono-supabase-api-template](../cf-hono-supabase-api-template) running locally or deployed (for `/health` and `/me`)
+- [cf-hono-supabase-gemini-api-template](../cf-hono-supabase-gemini-api-template) running locally or deployed (for `/health` and `/chat`)
 
 ## 1. Create a Supabase project
 
@@ -51,7 +51,7 @@ Add every origin you use (local Vite port and Cloudflare Pages URL).
 
 ## 6. Backend worker secrets
 
-In `cf-hono-supabase-api-template`, set the same Supabase URL and keys in `.dev.vars` (local) or Wrangler secrets (production). See that repo's `SETUP.md`.
+In `cf-hono-supabase-gemini-api-template`, set the same Supabase URL and keys in `.dev.vars` (local) or Wrangler secrets (production). See that repo's `SETUP.md`.
 
 Set `ALLOWED_ORIGINS` to your frontend URL for CORS.
 
@@ -59,7 +59,7 @@ Set `ALLOWED_ORIGINS` to your frontend URL for CORS.
 
 ```bash
 # Terminal 1 — API worker
-cd ../cf-hono-supabase-api-template && npm run dev
+cd ../cf-hono-supabase-gemini-api-template && npm run dev
 
 # Terminal 2 — React app
 bun run dev

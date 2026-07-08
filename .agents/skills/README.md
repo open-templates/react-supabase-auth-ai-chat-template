@@ -1,10 +1,10 @@
-# react-supabase-auth-template — Agent Skills Index
+# react-supabase-auth-ai-chat-template — Agent Skills Index
 
 Skills in `.agents/skills/` teach agents how this repository works and how to extend it safely.
 
 ## Project status (current template)
 
-Minimal **React + Supabase Auth** SPA paired with **cf-hono-supabase-api-template**:
+Minimal **React + Supabase Auth** SPA paired with **cf-hono-supabase-gemini-api-template**:
 
 - **Auth:** Google OAuth + email/password (`src/auth/`)
 - **API calls:** `GET /health` (header indicator), `GET /me` (home page) via `apiFetch`
@@ -39,7 +39,7 @@ src/
 
 ## Extension order
 
-1. **Backend first** — add route in `cf-hono-supabase-api-template`, document in its `specs/FEATURES.md`
+1. **Backend first** — add route in `cf-hono-supabase-gemini-api-template`, document in its `specs/FEATURES.md`
 2. **Frontend API module** — `src/api/<feature>.ts` using `apiFetch`
 3. **Page or component** — register route in `App.tsx` with `AuthGuard`
 4. **Update** `specs/FEATURES.md` and this skills index if patterns change

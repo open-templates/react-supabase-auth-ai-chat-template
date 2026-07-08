@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
-import { Loader2Icon } from "lucide-react";
+import { Link } from "react-router";
+import { Loader2Icon, MessageSquareIcon } from "lucide-react";
 import { useAuth } from "@/auth/AuthContext";
 import { fetchMe, type MeResponse } from "@/api/me";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -41,13 +43,21 @@ export default function HomePage() {
 
   return (
     <div className="flex flex-col gap-6 py-8">
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight">Welcome</h1>
-        <p className="text-muted-foreground mt-1">
-          You are signed in. This page calls the protected{" "}
-          <code className="text-sm">GET /me</code> API on your Cloudflare
-          Worker backend.
-        </p>
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight">Welcome</h1>
+          <p className="text-muted-foreground mt-1">
+            You are signed in. This page calls the protected{" "}
+            <code className="text-sm">GET /me</code> endpoint on your worker to
+            verify JWT auth end-to-end.
+          </p>
+        </div>
+        <Button asChild>
+          <Link to="/chat">
+            <MessageSquareIcon className="h-4 w-4" />
+            Open AI chat
+          </Link>
+        </Button>
       </div>
 
       <Card>
@@ -69,7 +79,7 @@ export default function HomePage() {
         <CardHeader>
           <CardTitle>Profile (API /me)</CardTitle>
           <CardDescription>
-            Returned by cf-hono-supabase-api-template using your JWT.
+            Server-validated profile JSON using your Bearer token.
           </CardDescription>
         </CardHeader>
         <CardContent>
