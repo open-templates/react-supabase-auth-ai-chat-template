@@ -79,7 +79,7 @@ Implement the route on the paired worker first. Response shape:
 { "success": true, "data": { ... } }
 ```
 
-Document both sides in each repo's `specs/FEATURES.md`.
+Document both sides in each repo's `index.md`.
 
 ## Do not
 
@@ -89,5 +89,5 @@ Document both sides in each repo's `specs/FEATURES.md`.
 
 ## See also
 
-- [`specs/FEATURES.md`](../../specs/FEATURES.md)
+- [`index.md`](../../index.md)
 - Backend skill: `cf-hono-supabase-gemini-api-template/.agents/skills/create-api-endpoint/SKILL.md`

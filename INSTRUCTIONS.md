@@ -12,7 +12,7 @@ Use this file when turning this template into a **production SPA** with Supabase
 | **Home (`/`)** | `GET /me` JWT verification and session debug |
 | **AI chat (`/chat`)** | Chat UI → `POST /chat` with Bearer JWT |
 
-Details: [`specs/FEATURES.md`](specs/FEATURES.md)
+Details: [`index.md`](index.md)
 
 ---
 
@@ -82,20 +82,23 @@ Test:
 1. Open `/login` — header should show API status (requires worker; see below).
 2. Sign in with Google or email.
 3. On `/` — session card + **Profile (API /me)** JSON.
+4. On `/chat` — send a message (requires worker with `GEMINI_API_KEY`).
 
 ---
 
 ## Connecting the backend (missing piece for API calls)
 
-This frontend does **not** include the API worker. For `/health` and `/me`:
+This frontend does **not** include the API worker. For `/health`, `/me`, and `/chat`:
 
 1. Clone or fork **[cf-hono-supabase-gemini-api-template](https://github.com/open-templates/cf-hono-supabase-gemini-api-template)**.
-2. Complete **its** `INSTRUCTIONS.md` (same Supabase project credentials in worker `.dev.vars`).
+2. Complete **its** `INSTRUCTIONS.md` (same Supabase project credentials in worker `.dev.vars`; set `GEMINI_API_KEY` for chat).
 3. Start worker: `npm run dev` (port `8787`).
 4. Set worker `ALLOWED_ORIGINS=http://localhost:5173` (and production URL when deployed).
 5. Deploy worker to Cloudflare; set `VITE_API_BASE_URL` to the worker URL in production.
 
 Use the **same Supabase project** for both templates so JWTs issued to the browser are valid on the worker.
+
+Test chat: sign in → `/chat` → send a message (requires worker with Gemini configured).
 
 ---
 
@@ -104,12 +107,13 @@ Use the **same Supabase project** for both templates so JWTs issued to the brows
 Read in order:
 
 1. **`INSTRUCTIONS.md`** (this file) — OAuth + env setup
-2. **`specs/FEATURES.md`** — routes and API contract
-3. **`.agents/skills/README.md`** — skill index
+2. **`index.md`** — routes and API contract
+3. **`.agents/skills/index.md`** — OKF module guides
+4. **`.agents/skills/README.md`** — Cursor `SKILL.md` catalog
 
 ### Adding a feature page
 
-1. **Backend route** in cf-hono template (if new API) — document in both `specs/FEATURES.md` files
+1. **Backend route** in cf-hono template (if new API) — document in both `index.md` files
 2. **API module**: `src/api/<feature>.ts` using `apiFetch` — see `api-architecture` skill
 3. **Page**: `src/pages/` + route in `src/App.tsx` with `AuthGuard`
 4. **i18n**: keys in `src/locales/en.json` and `es.json`
@@ -127,11 +131,13 @@ Read in order:
 
 ```
 src/auth/           AuthContext, guards, forms, auth pages
-src/api/            apiFetch, health, me (+ your modules)
+src/api/            apiFetch, health, me, chat (+ your modules)
 src/layout/         AppLayout, AppHeader (health dot)
-src/pages/          HomePage (+ your pages)
-specs/FEATURES.md   Feature specification
-.agents/skills/     Agent skills
+src/pages/          HomePage, ChatPage (+ your pages)
+src/lib/            chat-threads.ts (cleared on sign-out)
+index.md            OKF bundle root
+specs/features/     Numbered feature specs
+.agents/skills/     OKF modules + Cursor SKILL.md packs
 .cursor/rules/      Cursor IDE rules
 docs/               Supabase setup guide
 ```
@@ -154,6 +160,7 @@ docs/               Supabase setup guide
 | Google OAuth redirect error | Redirect URI in Google = `https://<ref>.supabase.co/auth/v1/callback`; Site URL matches app origin |
 | API offline in header | Worker running; `VITE_API_BASE_URL` correct |
 | `/me` fails after login | Same Supabase project on worker; CORS `ALLOWED_ORIGINS` |
+| Chat returns 500/502 | Worker has `GEMINI_API_KEY`; check worker logs |
 
 ---
 

@@ -11,7 +11,7 @@
 | `/chat` (authenticated) | AI chat → `POST /chat` with Bearer JWT |
 | Header | API health poll (`GET /health`) |
 
-See [`specs/FEATURES.md`](specs/FEATURES.md).
+See [`index.md`](index.md).
 
 ## Quick start
 

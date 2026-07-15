@@ -1,0 +1,16 @@
+# Features
+
+* [01 — Purpose](01-purpose.md)
+* [02 — Auth providers](02-auth-providers.md)
+* [03 — Auth session](03-auth-session.md)
+* [04 — Auth routes](04-auth-routes.md)
+* [05 — API integration](05-api-integration.md)
+* [06 — Home page](06-home-page.md)
+* [07 — AI chat UI](07-ai-chat-ui.md)
+* [08 — Chat threads](08-chat-threads.md)
+* [09 — Markdown replies](09-markdown-replies.md)
+* [10 — Header navigation](10-header-navigation.md)
+* [11 — Layout](11-layout.md)
+* [12 — Key files](12-key-files.md)
+* [13 — Backend pairing](13-backend-pairing.md)
+* [14 — Extension guidelines](14-extension-guidelines.md)

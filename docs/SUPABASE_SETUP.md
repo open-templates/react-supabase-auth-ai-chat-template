@@ -88,4 +88,4 @@ bun run dev
 ## References
 
 - [Supabase Auth docs](https://supabase.com/docs/guides/auth)
-- [Template features spec](../specs/FEATURES.md)
+- [Template features spec](../index.md)

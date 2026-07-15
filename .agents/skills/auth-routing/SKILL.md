@@ -85,5 +85,5 @@ Auth UI lives in `src/auth/components/` (`login-form`, `signup-form`, etc.) usin
 
 ## See also
 
-- [`specs/FEATURES.md`](../../specs/FEATURES.md)
+- [`index.md`](../../index.md)
 - [api-architecture](../api-architecture/SKILL.md)

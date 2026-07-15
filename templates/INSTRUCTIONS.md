@@ -10,7 +10,7 @@
 | `/chat` | Bearer session | AI chat UI → `POST /chat` |
 | `/login`, `/signup`, … | Guest/auth | Supabase auth flows |
 
-Details: [`specs/FEATURES.md`](specs/FEATURES.md)
+Details: [`index.md`](index.md)
 
 ## Local development
 

@@ -7,7 +7,7 @@ alwaysApply: true
 
 Read **`INSTRUCTIONS.md`** first — Supabase project, Google Cloud OAuth app, Supabase Google provider, redirect URLs, and `.env.local` are required before the app works in production.
 
-- Feature contract: `specs/FEATURES.md`
+- Feature contract: `index.md`
 - Agent skills: `.agents/skills/README.md`
 - Routes: `/`, `/login`, `/signup`, `/recover-password`, `/reset-password`
 - API client: `src/api/api.ts` (`apiFetch`) → worker at `VITE_API_BASE_URL`

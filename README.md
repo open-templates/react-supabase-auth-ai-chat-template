@@ -33,7 +33,7 @@ See [`templates/ABOUT_TEMPLATES.md`](templates/ABOUT_TEMPLATES.md) and [`docs/IN
 | **AI chat (`/chat`)** | Chat UI → `POST /chat` with Bearer JWT |
 | Session + token refresh | `apiFetch` attaches JWT and retries on `401` |
 
-See [`specs/FEATURES.md`](specs/FEATURES.md).
+See [`index.md`](index.md).
 
 ## Environment
 

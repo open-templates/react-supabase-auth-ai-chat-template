@@ -48,7 +48,7 @@ useEffect(() => {
 2. Register in `src/App.tsx` under `AppLayout` children
 3. Wrap with `<AuthGuard requireAuth>` unless guest-only
 4. Add API module in `src/api/` if the page calls the worker
-5. Update `specs/FEATURES.md`
+5. Update `index.md`
 
 ## Auth page shell
 
